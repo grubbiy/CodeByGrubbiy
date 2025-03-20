@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premium Smart Watch - FleetCart</title>
+    <meta name="description" content="Track your fitness goals and stay connected with this stylish smart watch" />
+    <meta name="author" content="FleetCart" />
+    <style>
+      /* Base Styles */
+      :root {
+        --primary-color: #3b82f6;
+        --secondary-color: #1e40af;
+        --text-color: #333;
+        --light-text: #666;
+        --lighter-text: #999;
+        --background: #fff;
+        --light-background: #f9fafb;
+        --border-color: #e5e7eb;
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --transition: all 0.3s ease;
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+      
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      
+      ul {
+        list-style: none;
+      }
+      
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+      
+      button {
+        cursor: pointer;
+        font-family: inherit;
+      }
+      
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      
+      /* Header */
+      header {
+        background-color: var(--background);
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      
+      .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+      }
+      
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+      }
+      
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+      
+      .nav-links a {
+        transition: var(--transition);
+      }
+      
+      .nav-links a:hover {
+        color: var(--primary-color);
+      }
+      
+      .nav-icons {
+        display: flex;
+        gap: 1rem;
+      }
+      
+      .nav-icons a {
+        transition: var(--transition);
+      }
+      
+      .nav-icons a:hover {
+        color: var(--primary-color);
+      }
+      
+      /* Breadcrumbs */
+      .breadcrumbs {
+        padding: 1rem 0;
+        color: var(--light-text);
+        font-size: 0.875rem;
+      }
+      
+      .breadcrumbs a {
+        transition: var(--transition);
+      }
+      
+      .breadcrumbs a:hover {
+        color: var(--primary-color);
+      }
+      
+      /* Product Detail */
+      .product-detail {
+        padding: 2rem 0 4rem;
+      }
+      
+      .product-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+      }
+      
+      .product-gallery {
+        display: grid;
+        grid-template-columns: 80px 1fr;
+        gap: 1rem;
+      }
+      
+      .gallery-thumbnails {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .thumbnail {
+        width: 80px;
+        height: 80px;
+        border-radius: 0.25rem;
+        overflow: hidden;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: var(--transition);
+      }
+      
+      .thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      .thumbnail.active {
+        border-color: var(--primary-color);
+      }
+      
+      .gallery-main {
+        border-radius: 0.5rem;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+      
+      .gallery-main img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      .product-info h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+      
+      .product-price {
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+      
+      .product-rating {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+      
+      .stars {
+        color: #f59e0b;
+      }
+      
+      .review-count {
+        color: var(--light-text);
+        font-size: 0.875rem;
+      }
+      
+      .product-description {
+        margin-bottom: 2rem;
+      }
+      
+      .product-features {
+        margin-bottom: 2rem;
+      }
+      
+      .product-features h3 {
+        margin-bottom: 0.75rem;
+      }
+      
+      .feature-list li {
+        margin-bottom: 0.5rem;
+        position: relative;
+        padding-left: 1.5rem;
+      }
+      
+      .feature-list li::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: var(--primary-color);
+      }
+      
+      .product-options {
+        margin-bottom: 2rem;
+      }
+      
+      .option-label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+      
+      .color-options {
+        display: flex;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+      
+      .color-option {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: var(--transition);
+      }
+      
+      .color-option.active {
+        border-color: var(--primary-color);
+      }
+      
+      .quantity-selector {
+        display: flex;
+        align-items: center;
+        max-width: 120px;
+        border: 1px solid var(--border-color);
+        border-radius: 0.375rem;
+        overflow: hidden;
+        margin-bottom: 1.5rem;
+      }
+      
+      .quantity-btn {
+        width: 40px;
+        height: 40px;
+        background-color: var(--light-background);
+        border: none;
+        font-size: 1.125rem;
+      }
+      
+      .quantity-input {
+        width: 40px;
+        height: 40px;
+        border: none;
+        text-align: center;
+        font-family: inherit;
+      }
+      
+      .product-actions {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+      
+      .btn {
+        display: inline-block;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.375rem;
+        font-weight: 500;
+        transition: var(--transition);
+        border: none;
+      }
+      
+      .btn:hover {
+        background-color: var(--secondary-color);
+        transform: translateY(-2px);
+      }
+      
+      .btn-secondary {
+        background-color: transparent;
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
+      }
+      
+      .btn-secondary:hover {
+        background-color: var(--light-background);
+        transform: translateY(-2px);
+      }
+      
+      .delivery-info {
+        background-color: var(--light-background);
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+      }
+      
+      .delivery-info h3 {
+        margin-bottom: 0.75rem;
+      }
+      
+      .delivery-info p {
+        margin-bottom: 0.5rem;
+      }
+      
+      /* Tabs */
+      .product-tabs {
+        margin-top: 4rem;
+      }
+      
+      .tabs-header {
+        display: flex;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 2rem;
+      }
+      
+      .tab-btn {
+        padding: 1rem 1.5rem;
+        background-color: transparent;
+        border: none;
+        border-bottom: 2px solid transparent;
+        font-weight: 600;
+        transition: var(--transition);
+        margin-bottom: -1px;
+      }
+      
+      .tab-btn.active {
+        border-bottom-color: var(--primary-color);
+        color: var(--primary-color);
+      }
+      
+      .tab-content {
+        display: none;
+      }
+      
+      .tab-content.active {
+        display: block;
+      }
+      
+      /* Reviews */
+      .review {
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 2rem;
+        margin-bottom: 2rem;
+      }
+      
+      .review:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+      }
+      
+      .review-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+      }
+      
+      .reviewer-name {
+        font-weight: 600;
+      }
+      
+      .review-date {
+        color: var(--light-text);
+        font-size: 0.875rem;
+      }
+      
+      .review-stars {
+        color: #f59e0b;
+        margin-bottom: 0.5rem;
+      }
+      
+      /* Related Products */
+      .related-products {
+        margin-top: 4rem;
+      }
+      
+      .section-title {
+        font-size: 1.75rem;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+      
+      .related-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+      
+      .product-card {
+        background-color: var(--background);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+      }
+      
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+      
+      .product-image {
+        height: 200px;
+        overflow: hidden;
+      }
+      
+      .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+      
+      .product-card:hover .product-image img {
+        transform: scale(1.05);
+      }
+      
+      .product-card-info {
+        padding: 1.5rem;
+      }
+      
+      .product-card-name {
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+      
+      .product-card-price {
+        font-size: 1rem;
+        color: var(--primary-color);
+        font-weight: 600;
+      }
+      
+      /* Footer */
+      footer {
+        background-color: var(--text-color);
+        color: white;
+        padding: 3rem 0 1rem;
+        margin-top: 4rem;
+      }
+      
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+      
+      .footer-column h3 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+      }
+      
+      .footer-links li {
+        margin-bottom: 0.5rem;
+      }
+      
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.7);
+        transition: var(--transition);
+      }
+      
+      .footer-links a:hover {
+        color: white;
+      }
+      
+      .copyright {
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+      
+      /* Responsive */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+        
+        .product-gallery {
+          grid-template-columns: 1fr;
+        }
+        
+        .gallery-thumbnails {
+          flex-direction: row;
+          order: 2;
+          overflow-x: auto;
+        }
+        
+        .gallery-main {
+          order: 1;
+        }
+        
+        .product-actions {
+          flex-direction: column;
+        }
+        
+        .product-actions .btn {
+          width: 100%;
+        }
+        
+        .tabs-header {
+          overflow-x: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header-inner">
+          <a href="index.html" class="logo">FleetCart</a>
+          <nav>
+            <ul class="nav-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="products.html">Products</a></li>
+              <li><a href="categories.html">Categories</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </nav>
+          <div class="nav-icons">
+            <a href="search.html">🔍</a>
+            <a href="account.html">👤</a>
+            <a href="cart.html">🛒</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="index.html">Home</a> &gt; <a href="products.html">Products</a> &gt; <a href="categories.html?category=electronics">Electronics</a> &gt; Premium Smart Watch
+      </div>
+
+      <section class="product-detail">
+        <div class="product-container">
+          <div class="product-gallery">
+            <div class="gallery-thumbnails">
+              <div class="thumbnail active">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=80&h=80&auto=format&fit=crop&q=80" alt="Smart Watch Front">
+              </div>
+              <div class="thumbnail">
+                <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=80&h=80&auto=format&fit=crop&q=80" alt="Smart Watch Side">
+              </div>
+              <div class="thumbnail">
+                <img src="https://images.unsplash.com/photo-1622434641406-a158123450f9?w=80&h=80&auto=format&fit=crop&q=80" alt="Smart Watch Back">
+              </div>
+              <div class="thumbnail">
+                <img src="https://images.unsplash.com/photo-1617043786394-f977fa12eddf?w=80&h=80&auto=format&fit=crop&q=80" alt="Smart Watch on Wrist">
+              </div>
+            </div>
+            <div class="gallery-main">
+              <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30" alt="Premium Smart Watch">
+            </div>
+          </div>
+          
+          <div class="product-info">
+            <h1>Premium Smart Watch</h1>
+            <p class="product-price">$79.99</p>
+            <div class="product-rating">
+              <div class="stars">★★★★★</div>
+              <span class="review-count">(42 reviews)</span>
+            </div>
+            <div class="product-description">
+              <p>Track your fitness goals and stay connected with this stylish smart watch. Features a high-resolution display, heart rate monitor, sleep tracking, and up to 7 days of battery life. Water-resistant up to 50 meters.</p>
+            </div>
+            
+            <div class="product-features">
+              <h3>Key Features</h3>
+              <ul class="feature-list">
+                <li>1.3" High-resolution color touchscreen</li>
+                <li>Heart rate and blood oxygen monitoring</li>
+                <li>Sleep tracking and step counter</li>
+                <li>Water-resistant up to 50 meters</li>
+                <li>Up to 7 days of battery life</li>
+                <li>Customizable watch faces</li>
+                <li>Compatible with iOS and Android</li>
+              </ul>
+            </div>
+            
+            <div class="product-options">
+              <label class="option-label">Color</label>
+              <div class="color-options">
+                <div class="color-option active" style="background-color: #000"></div>
+                <div class="color-option" style="background-color: #555"></div>
+                <div class="color-option" style="background-color: #3b82f6"></div>
+                <div class="color-option" style="background-color: #9333ea"></div>
+              </div>
+              
+              <div class="quantity-selector">
+                <button class="quantity-btn">-</button>
+                <input type="text" class="quantity-input" value="1">
+                <button class="quantity-btn">+</button>
+              </div>
+            </div>
+            
+            <div class="product-actions">
+              <button class="btn">Add to Cart</button>
+              <button class="btn btn-secondary">Add to Wishlist</button>
+            </div>
+            
+            <div class="delivery-info">
+              <h3>Shipping Information</h3>
+              <p><strong>Free Shipping:</strong> Orders over $50 (2-5 business days)</p>
+              <p><strong>Express Shipping:</strong> 1-3 business days ($9.99)</p>
+              <p><strong>Same Day Delivery:</strong> Available in select cities ($14.99)</p>
+              <p><strong>Easy Returns:</strong> 30-day money-back guarantee</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="product-tabs">
+          <div class="tabs-header">
+            <button class="tab-btn active" data-tab="description">Description</button>
+            <button class="tab-btn" data-tab="specifications">Specifications</button>
+            <button class="tab-btn" data-tab="reviews">Reviews (42)</button>
+          </div>
+          
+          <div class="tab-content active" id="description">
+            <p>The Premium Smart Watch is the perfect companion for your active lifestyle. With its sleek design and advanced features, it helps you stay on top of your fitness goals while keeping you connected to what matters most.</p>
+            <p>Track your steps, monitor your heart rate, analyze your sleep patterns, and receive notifications for calls, messages, and apps – all from your wrist. The high-resolution display is easy to read even in bright sunlight, and the intuitive touch interface makes navigation a breeze.</p>
+            <p>Water-resistant up to 50 meters, this smart watch can accompany you to the pool, beach, or even in the shower. The durable battery lasts up to 7 days on a single charge, ensuring that you're always connected.</p>
+            <p>Choose from dozens of customizable watch faces to match your style, and swap out the band for a different look whenever you want. Compatible with both iOS and Android devices, the Premium Smart Watch seamlessly integrates with your smartphone to enhance your daily experience.</p>
+          </div>
+          
+          <div class="tab-content" id="specifications">
+            <h3>Technical Specifications</h3>
+            <ul>
+              <li><strong>Display:</strong> 1.3" AMOLED touchscreen (360 x 360 pixels)</li>
+              <li><strong>Sensors:</strong> Accelerometer, Gyroscope, Optical heart rate, Blood oxygen</li>
+              <li><strong>Connectivity:</strong> Bluetooth 5.0, GPS</li>
+              <li><strong>Water Resistance:</strong> 5 ATM (up to 50 meters)</li>
+              <li><strong>Battery:</strong> 300mAh Li-ion (up to 7 days typical use)</li>
+              <li><strong>Charging Time:</strong> Approximately 2 hours</li>
+              <li><strong>Compatibility:</strong> iOS 11.0+ and Android 6.0+</li>
+              <li><strong>Dimensions:</strong> 42mm x 42mm x 11mm</li>
+              <li><strong>Weight:</strong> 38g (without band)</li>
+              <li><strong>Materials:</strong> Aluminum case, silicone band</li>
+              <li><strong>Colors:</strong> Black, Gray, Blue, Purple</li>
+              <li><strong>In the Box:</strong> Smart watch, Charging cable, User manual</li>
+            </ul>
+          </div>
+          
+          <div class="tab-content" id="reviews">
+            <div class="review">
+              <div class="review-header">
+                <div class="reviewer-name">Sarah Johnson</div>
+                <div class="review-date">April 15, 2023</div>
+              </div>
+              <div class="review-stars">★★★★★</div>
+              <p>This smart watch exceeds my expectations! The battery life is amazing - I only need to charge it once a week. The sleep tracking feature has been eye-opening and helped me improve my sleep habits. The screen is bright and responsive. Highly recommend!</p>
+            </div>
+            
+            <div class="review">
+              <div class="review-header">
+                <div class="reviewer-name">Michael Rodriguez</div>
+                <div class="review-date">March 28, 2023</div>
+              </div>
+              <div class="review-stars">★★★★☆</div>
+              <p>Great value for money. The watch looks premium and has all the features I need. The step counter seems accurate and I love the customizable watch faces. Only giving 4 stars because the app could be more intuitive, but the watch itself is fantastic.</p>
+            </div>
+            
+            <div class="review">
+              <div class="review-header">
+                <div class="reviewer-name">Emily Chen</div>
+                <div class="review-date">February 12, 2023</div>
+              </div>
+              <div class="review-stars">★★★★★</div>
+              <p>Perfect fitness companion! I've been using this watch for swimming and running, and it tracks everything accurately. The notifications are handy, and I can even reply to texts right from my wrist. The battery lasts for days even with heavy use. Couldn't be happier with my purchase!</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="related-products">
+        <h2 class="section-title">You May Also Like</h2>
+        <div class="related-grid">
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb" alt="Wireless Earbuds">
+            </div>
+            <div class="product-card-info">
+              <h3 class="product-card-name">Wireless Earbuds</h3>
+              <p class="product-card-price">$49.99</p>
+            </div>
+          </div>
+          
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12" alt="Selfie Ring Light">
+            </div>
+            <div class="product-card-info">
+              <h3 class="product-card-name">Selfie Ring Light</h3>
+              <p class="product-card-price">$24.99</p>
+            </div>
+          </div>
+          
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1625961276676-25c5abbebe12" alt="Fitness Tracker">
+            </div>
+            <div class="product-card-info">
+              <h3 class="product-card-name">Fitness Tracker</h3>
+              <p class="product-card-price">$59.99</p>
+            </div>
+          </div>
+          
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1584564515943-9ce932c0259a" alt="Power Bank">
+            </div>
+            <div class="product-card-info">
+              <h3 class="product-card-name">20,000mAh Power Bank</h3>
+              <p class="product-card-price">$34.99</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-column">
+            <h3>FleetCart</h3>
+            <p>Premium products at affordable prices. Fast shipping, excellent customer service, and hassle-free returns.</p>
+          </div>
+          
+          <div class="footer-column">
+            <h3>Shop</h3>
+            <ul class="footer-links">
+              <li><a href="products.html">All Products</a></li>
+              <li><a href="categories.html">Categories</a></li>
+              <li><a href="deals.html">Deals & Discounts</a></li>
+              <li><a href="new-arrivals.html">New Arrivals</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-column">
+            <h3>Customer Service</h3>
+            <ul class="footer-links">
+              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="shipping.html">Shipping Policy</a></li>
+              <li><a href="returns.html">Returns & Refunds</a></li>
+              <li><a href="faq.html">FAQ</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-column">
+            <h3>Company</h3>
+            <ul class="footer-links">
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="blog.html">Blog</a></li>
+              <li><a href="careers.html">Careers</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="copyright">
+          &copy; 2023 FleetCart. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Simple JavaScript for the product page functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        // Tab switching
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            
+            // Remove active class from all buttons and tabs
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tabContents.forEach(t => t.classList.remove('active'));
+            
+            // Add active class to current button and tab
+            this.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+          });
+        });
+        
+        // Thumbnail gallery
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        const mainImage = document.querySelector('.gallery-main img');
+        
+        thumbnails.forEach(thumb => {
+          thumb.addEventListener('click', function() {
+            // Remove active class from all thumbnails
+            thumbnails.forEach(t => t.classList.remove('active'));
+            
+            // Add active class to clicked thumbnail
+            this.classList.add('active');
+            
+            // Update main image
+            const imgSrc = this.querySelector('img').src.split('?')[0];
+            mainImage.src = imgSrc;
+          });
+        });
+        
+        // Quantity selector
+        const minusBtn = document.querySelector('.quantity-btn:first-child');
+        const plusBtn = document.querySelector('.quantity-btn:last-child');
+        const quantityInput = document.querySelector('.quantity-input');
+        
+        minusBtn.addEventListener('click', function() {
+          let quantity = parseInt(quantityInput.value);
+          if (quantity > 1) {
+            quantityInput.value = quantity - 1;
+          }
+        });
+        
+        plusBtn.addEventListener('click', function() {
+          let quantity = parseInt(quantityInput.value);
+          quantityInput.value = quantity + 1;
+        });
+        
+        // Color options
+        const colorOptions = document.querySelectorAll('.color-option');
+        
+        colorOptions.forEach(option => {
+          option.addEventListener('click', function() {
+            // Remove active class from all color options
+            colorOptions.forEach(o => o.classList.remove('active'));
+            
+            // Add active class to clicked color option
+            this.classList.add('active');
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
