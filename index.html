@@ -1,11 +1,640 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p>No thanks</p>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FleetCart - Premium Dropshipping Store</title>
+    <meta name="description" content="High quality products at affordable prices" />
+    <meta name="author" content="FleetCart" />
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <style>
+      /* Base Styles */
+      :root {
+        --primary-color: #3b82f6;
+        --secondary-color: #1e40af;
+        --text-color: #333;
+        --light-text: #666;
+        --lighter-text: #999;
+        --background: #fff;
+        --light-background: #f9fafb;
+        --border-color: #e5e7eb;
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --transition: all 0.3s ease;
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+      
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      
+      ul {
+        list-style: none;
+      }
+      
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+      
+      button {
+        cursor: pointer;
+        font-family: inherit;
+      }
+      
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      
+      /* Header */
+      header {
+        background-color: var(--background);
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      
+      .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+      }
+      
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+      }
+      
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+      
+      .nav-links a {
+        transition: var(--transition);
+      }
+      
+      .nav-links a:hover {
+        color: var(--primary-color);
+      }
+      
+      .nav-icons {
+        display: flex;
+        gap: 1rem;
+      }
+      
+      .nav-icons a {
+        transition: var(--transition);
+      }
+      
+      .nav-icons a:hover {
+        color: var(--primary-color);
+      }
+      
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(90deg, hsla(216, 41%, 79%, 1) 0%, hsla(186, 33%, 94%, 1) 100%);
+        padding: 5rem 0;
+        text-align: center;
+      }
+      
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+      
+      .hero p {
+        font-size: 1.25rem;
+        color: var(--light-text);
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .btn {
+        display: inline-block;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.375rem;
+        font-weight: 500;
+        transition: var(--transition);
+        border: none;
+      }
+      
+      .btn:hover {
+        background-color: var(--secondary-color);
+        transform: translateY(-2px);
+      }
+      
+      /* Featured Products */
+      .section-title {
+        text-align: center;
+        margin: 4rem 0 2rem;
+        font-size: 2rem;
+      }
+      
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+      
+      .product-card {
+        background-color: var(--background);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+      }
+      
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+      
+      .product-image {
+        height: 200px;
+        overflow: hidden;
+      }
+      
+      .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+      
+      .product-card:hover .product-image img {
+        transform: scale(1.05);
+      }
+      
+      .product-info {
+        padding: 1.5rem;
+      }
+      
+      .product-name {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+      
+      .product-price {
+        font-size: 1.125rem;
+        color: var(--primary-color);
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+      
+      .product-description {
+        color: var(--light-text);
+        margin-bottom: 1rem;
+        font-size: 0.875rem;
+      }
+      
+      /* Categories */
+      .categories {
+        background-color: var(--light-background);
+        padding: 4rem 0;
+      }
+      
+      .categories-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 2rem;
+      }
+      
+      .category-card {
+        background-color: var(--background);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        text-align: center;
+        transition: var(--transition);
+      }
+      
+      .category-card:hover {
+        transform: translateY(-5px);
+      }
+      
+      .category-image {
+        height: 150px;
+        overflow: hidden;
+      }
+      
+      .category-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      .category-name {
+        padding: 1rem;
+        font-weight: 600;
+      }
+      
+      /* Testimonials */
+      .testimonials {
+        padding: 4rem 0;
+      }
+      
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+      
+      .testimonial-card {
+        background-color: var(--background);
+        border-radius: 0.5rem;
+        padding: 2rem;
+        box-shadow: var(--shadow);
+      }
+      
+      .testimonial-text {
+        font-style: italic;
+        margin-bottom: 1rem;
+      }
+      
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      
+      .author-image {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+      
+      .author-name {
+        font-weight: 600;
+      }
+      
+      .author-title {
+        color: var(--light-text);
+        font-size: 0.875rem;
+      }
+      
+      /* Newsletter */
+      .newsletter {
+        background-color: var(--light-background);
+        padding: 4rem 0;
+        text-align: center;
+      }
+      
+      .newsletter h2 {
+        margin-bottom: 1rem;
+      }
+      
+      .newsletter p {
+        max-width: 600px;
+        margin: 0 auto 2rem;
+        color: var(--light-text);
+      }
+      
+      .newsletter-form {
+        max-width: 500px;
+        margin: 0 auto;
+        display: flex;
+      }
+      
+      .newsletter-input {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: 0.375rem 0 0 0.375rem;
+        font-family: inherit;
+      }
+      
+      .newsletter-btn {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 0 1.5rem;
+        border-radius: 0 0.375rem 0.375rem 0;
+        font-weight: 500;
+        transition: var(--transition);
+      }
+      
+      .newsletter-btn:hover {
+        background-color: var(--secondary-color);
+      }
+      
+      /* Footer */
+      footer {
+        background-color: var(--text-color);
+        color: white;
+        padding: 3rem 0 1rem;
+      }
+      
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+      
+      .footer-column h3 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+      }
+      
+      .footer-links li {
+        margin-bottom: 0.5rem;
+      }
+      
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.7);
+        transition: var(--transition);
+      }
+      
+      .footer-links a:hover {
+        color: white;
+      }
+      
+      .copyright {
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+      
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2rem;
+        }
+        
+        .hero p {
+          font-size: 1rem;
+        }
+        
+        .nav-links {
+          display: none;
+        }
+        
+        .newsletter-form {
+          flex-direction: column;
+        }
+        
+        .newsletter-input {
+          border-radius: 0.375rem;
+          margin-bottom: 1rem;
+        }
+        
+        .newsletter-btn {
+          border-radius: 0.375rem;
+          padding: 0.75rem;
+        }
+      }
+    </style>
+    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header-inner">
+          <a href="index.html" class="logo">FleetCart</a>
+          <nav>
+            <ul class="nav-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="products.html">Products</a></li>
+              <li><a href="categories.html">Categories</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </nav>
+          <div class="nav-icons">
+            <a href="search.html">🔍</a>
+            <a href="account.html">👤</a>
+            <a href="cart.html">🛒</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="container">
+        <h1>Premium Products, Affordable Prices</h1>
+        <p>Discover our curated selection of high-quality products that won't break the bank. Free shipping on orders over $50.</p>
+        <a href="products.html" class="btn">Shop Now</a>
+      </div>
+    </section>
+
+    <section class="featured">
+      <div class="container">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30" alt="Smart Watch">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Premium Smart Watch</h3>
+              <p class="product-price">$79.99</p>
+              <p class="product-description">Track your fitness goals and stay connected with this stylish smart watch.</p>
+              <a href="product-detail.html" class="btn">View Details</a>
+            </div>
+          </div>
+          
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb" alt="Wireless Earbuds">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Wireless Earbuds</h3>
+              <p class="product-price">$49.99</p>
+              <p class="product-description">Enjoy crystal clear sound with these comfortable wireless earbuds.</p>
+              <a href="product-detail.html" class="btn">View Details</a>
+            </div>
+          </div>
+          
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1560343090-f0409e92791a" alt="Minimalist Backpack">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Minimalist Backpack</h3>
+              <p class="product-price">$64.99</p>
+              <p class="product-description">Stylish and functional backpack with multiple compartments.</p>
+              <a href="product-detail.html" class="btn">View Details</a>
+            </div>
+          </div>
+          
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1585386959984-a4a9d49436ec" alt="Portable Blender">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Portable Blender</h3>
+              <p class="product-price">$39.99</p>
+              <p class="product-description">Make healthy smoothies on the go with this rechargeable blender.</p>
+              <a href="product-detail.html" class="btn">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="categories">
+      <div class="container">
+        <h2 class="section-title">Shop by Category</h2>
+        <div class="categories-grid">
+          <a href="category.html" class="category-card">
+            <div class="category-image">
+              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e" alt="Electronics">
+            </div>
+            <div class="category-name">Electronics</div>
+          </a>
+          
+          <a href="category.html" class="category-card">
+            <div class="category-image">
+              <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2" alt="Fashion">
+            </div>
+            <div class="category-name">Fashion</div>
+          </a>
+          
+          <a href="category.html" class="category-card">
+            <div class="category-image">
+              <img src="https://images.unsplash.com/photo-1547949003-9792a18a2601" alt="Home & Kitchen">
+            </div>
+            <div class="category-name">Home & Kitchen</div>
+          </a>
+          
+          <a href="category.html" class="category-card">
+            <div class="category-image">
+              <img src="https://images.unsplash.com/photo-1542272604-787c3835535d" alt="Beauty">
+            </div>
+            <div class="category-name">Beauty</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials">
+      <div class="container">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <p class="testimonial-text">"I ordered the smart watch and it exceeded my expectations. Great quality for the price and the shipping was incredibly fast!"</p>
+            <div class="testimonial-author">
+              <div class="author-image">
+                <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah Johnson">
+              </div>
+              <div>
+                <div class="author-name">Sarah Johnson</div>
+                <div class="author-title">Verified Buyer</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="testimonial-card">
+            <p class="testimonial-text">"The customer service is excellent. I had an issue with my order and they resolved it immediately. Will definitely shop here again!"</p>
+            <div class="testimonial-author">
+              <div class="author-image">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Thompson">
+              </div>
+              <div>
+                <div class="author-name">Michael Thompson</div>
+                <div class="author-title">Verified Buyer</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="testimonial-card">
+            <p class="testimonial-text">"The minimalist backpack is perfect for my daily commute. Stylish, durable, and has plenty of space for all my essentials."</p>
+            <div class="testimonial-author">
+              <div class="author-image">
+                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emily Chen">
+              </div>
+              <div>
+                <div class="author-name">Emily Chen</div>
+                <div class="author-title">Verified Buyer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="newsletter">
+      <div class="container">
+        <h2>Subscribe to Our Newsletter</h2>
+        <p>Stay updated with our latest products and exclusive offers. Subscribe to our newsletter today!</p>
+        <form class="newsletter-form">
+          <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+          <button type="submit" class="newsletter-btn">Subscribe</button>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-column">
+            <h3>FleetCart</h3>
+            <p>Premium products at affordable prices. Fast shipping, excellent customer service, and hassle-free returns.</p>
+          </div>
+          
+          <div class="footer-column">
+            <h3>Shop</h3>
+            <ul class="footer-links">
+              <li><a href="products.html">All Products</a></li>
+              <li><a href="categories.html">Categories</a></li>
+              <li><a href="deals.html">Deals & Discounts</a></li>
+              <li><a href="new-arrivals.html">New Arrivals</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-column">
+            <h3>Customer Service</h3>
+            <ul class="footer-links">
+              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="shipping.html">Shipping Policy</a></li>
+              <li><a href="returns.html">Returns & Refunds</a></li>
+              <li><a href="faq.html">FAQ</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-column">
+            <h3>Company</h3>
+            <ul class="footer-links">
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="blog.html">Blog</a></li>
+              <li><a href="careers.html">Careers</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="copyright">
+          &copy; 2023 FleetCart. All rights reserved.
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
